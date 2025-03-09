@@ -233,16 +233,20 @@
             position: relative;
         }
 
+        :root {
+            --cursor-position: 0ch;
+        }
+        
         .typewriter::after {
             content: '|';
             position: absolute;
-            right: -10px;
+            left: var(--cursor-position); /* 使用CSS变量控制光标位置 */
             animation: cursor-blink 0.8s infinite;
         }
 
         @keyframes cursor-blink {
             0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
+            50% { opacity: 0; }2841221426zzx201042
         }
     </style>
 </head>
@@ -254,13 +258,15 @@
             const text = '敬请期待';
             let index = 0;
             
-            // 先显示光标
+            // 先显示光标（光标已经通过CSS定位在左侧）
             setTimeout(function() {
                 // 开始逐个显示字符
                 const typingInterval = setInterval(function() {
                     if (index < text.length) {
                         typewriterElement.textContent += text.charAt(index);
                         index++;
+                        // 随着文字增加，动态调整光标位置
+                        document.documentElement.style.setProperty('--cursor-position', typewriterElement.textContent.length + 'ch');
                     } else {
                         clearInterval(typingInterval);
                     }
