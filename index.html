@@ -288,6 +288,11 @@
                         firstIndex++;
                     } else {
                         clearInterval(firstTypingInterval);
+                        // 检查两行是否都打完了
+                        if (secondIndex >= secondLine.length) {
+                            typewriterElements[0].classList.add('typing-done');
+                            typewriterElements[1].classList.add('typing-done');
+                        }
                     }
                 }, 150); // 第一行每150毫秒显示一个字符，加快速度
                 
@@ -298,6 +303,11 @@
                         secondIndex++;
                     } else {
                         clearInterval(secondTypingInterval);
+                        // 检查两行是否都打完了
+                        if (firstIndex >= firstLine.length) {
+                            typewriterElements[0].classList.add('typing-done');
+                            typewriterElements[1].classList.add('typing-done');
+                        }
                     }
                 }, 100); // 第二行每100毫秒显示一个字符，速度更快
             }, 1000);
