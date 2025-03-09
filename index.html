@@ -226,9 +226,47 @@
                     -50vmax -40vmax;
             }
         }
+
+        /* 打字机效果样式 */
+        .typewriter {
+            display: inline-block;
+            position: relative;
+        }
+
+        .typewriter::after {
+            content: '|';
+            position: absolute;
+            right: -10px;
+            animation: cursor-blink 0.8s infinite;
+        }
+
+        @keyframes cursor-blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
     </style>
 </head>
 <body>
-    <div>xxxxxx</div>
+    <div class="typewriter"></div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const typewriterElement = document.querySelector('.typewriter');
+            const text = '敬请期待';
+            let index = 0;
+            
+            // 先显示光标
+            setTimeout(function() {
+                // 开始逐个显示字符
+                const typingInterval = setInterval(function() {
+                    if (index < text.length) {
+                        typewriterElement.textContent += text.charAt(index);
+                        index++;
+                    } else {
+                        clearInterval(typingInterval);
+                    }
+                }, 500); // 每500毫秒显示一个字符
+            }, 1000); // 等待1秒后开始打字
+        });
+    </script>
 </body>
 </html>
