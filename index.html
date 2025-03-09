@@ -243,7 +243,13 @@
         
         /* 隐藏光标的类 */
         .typewriter.typing-done::after {
-            display: none;
+            animation: cursor-fade 1s forwards;
+        }
+        
+        /* 光标淡出动画 */
+        @keyframes cursor-fade {
+            0% { opacity: 1; }
+            100% { opacity: 0; }
         }
 
         /* 添加容器样式，使两行文字垂直排列 */
@@ -290,8 +296,11 @@
                         clearInterval(firstTypingInterval);
                         // 检查两行是否都打完了
                         if (secondIndex >= secondLine.length) {
-                            typewriterElements[0].classList.add('typing-done');
-                            typewriterElements[1].classList.add('typing-done');
+                            // 等待1秒后添加typing-done类，使光标缓慢消失
+                            setTimeout(function() {
+                                typewriterElements[0].classList.add('typing-done');
+                                typewriterElements[1].classList.add('typing-done');
+                            }, 1000);
                         }
                     }
                 }, 150); // 第一行每150毫秒显示一个字符，加快速度
@@ -305,8 +314,11 @@
                         clearInterval(secondTypingInterval);
                         // 检查两行是否都打完了
                         if (firstIndex >= firstLine.length) {
-                            typewriterElements[0].classList.add('typing-done');
-                            typewriterElements[1].classList.add('typing-done');
+                            // 等待1秒后添加typing-done类，使光标缓慢消失
+                            setTimeout(function() {
+                                typewriterElements[0].classList.add('typing-done');
+                                typewriterElements[1].classList.add('typing-done');
+                            }, 1000);
                         }
                     }
                 }, 100); // 第二行每100毫秒显示一个字符，速度更快
