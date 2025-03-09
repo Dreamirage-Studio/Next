@@ -241,6 +241,20 @@
             animation: cursor-blink 0.8s infinite;
         }
 
+        /* 添加容器样式，使两行文字垂直排列 */
+        .content-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        /* 第二行文字样式 */
+        .second-line {
+            font-size: 1.8rem; /* 第二行字体稍小 */
+            margin-top: 20px;
+        }
+
         @keyframes cursor-blink {
             0%, 100% { opacity: 1; }
             50% { opacity: 0; }
@@ -248,24 +262,42 @@
     </style>
 </head>
 <body>
-    <div class="typewriter"></div>
+    <div class="content-container">
+        <div class="typewriter"></div>
+        <div class="typewriter second-line"></div>
+    </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const typewriterElement = document.querySelector('.typewriter');
-            const text = '敬请期待';
-            let index = 0;
+            const typewriterElements = document.querySelectorAll('.typewriter');
+            const firstLine = '敬请期待';
+            const secondLine = 'Bilibili关注Afly-dream了解更多动态';
+            let firstIndex = 0;
+            let secondIndex = 0;
             
-            // 等待1秒后开始打字
+            // 等待1秒后开始第一行打字
             setTimeout(function() {
-                // 开始逐个显示字符
-                const typingInterval = setInterval(function() {
-                    if (index < text.length) {
-                        typewriterElement.textContent += text.charAt(index);
-                        index++;
+                // 开始逐个显示第一行字符
+                const firstTypingInterval = setInterval(function() {
+                    if (firstIndex < firstLine.length) {
+                        typewriterElements[0].textContent += firstLine.charAt(firstIndex);
+                        firstIndex++;
                     } else {
-                        clearInterval(typingInterval);
+                        clearInterval(firstTypingInterval);
+                        
+                        // 第一行完成后，等待1秒开始第二行打字
+                        setTimeout(function() {
+                            // 开始逐个显示第二行字符
+                            const secondTypingInterval = setInterval(function() {
+                                if (secondIndex < secondLine.length) {
+                                    typewriterElements[1].textContent += secondLine.charAt(secondIndex);
+                                    secondIndex++;
+                                } else {
+                                    clearInterval(secondTypingInterval);
+                                }
+                            }, 200); // 第二行每200毫秒显示一个字符，速度稍快
+                        }, 1000);
                     }
-                }, 500); // 每500毫秒显示一个字符
+                }, 500); // 第一行每500毫秒显示一个字符
             }, 1000);
         });
     </script>
