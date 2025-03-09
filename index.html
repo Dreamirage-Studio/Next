@@ -279,7 +279,7 @@
             let firstIndex = 0;
             let secondIndex = 0;
             
-            // 等待1秒后开始第一行打字
+            // 等待1秒后同时开始两行打字
             setTimeout(function() {
                 // 开始逐个显示第一行字符
                 const firstTypingInterval = setInterval(function() {
@@ -288,21 +288,18 @@
                         firstIndex++;
                     } else {
                         clearInterval(firstTypingInterval);
-                        
-                        // 第一行完成后，等待1秒开始第二行打字
-                        setTimeout(function() {
-                            // 开始逐个显示第二行字符
-                            const secondTypingInterval = setInterval(function() {
-                                if (secondIndex < secondLine.length) {
-                                    typewriterElements[1].textContent += secondLine.charAt(secondIndex);
-                                    secondIndex++;
-                                } else {
-                                    clearInterval(secondTypingInterval);
-                                }
-                            }, 200); // 第二行每200毫秒显示一个字符，速度稍快
-                        }, 1000);
                     }
-                }, 500); // 第一行每500毫秒显示一个字符
+                }, 150); // 第一行每150毫秒显示一个字符，加快速度
+                
+                // 同时开始逐个显示第二行字符
+                const secondTypingInterval = setInterval(function() {
+                    if (secondIndex < secondLine.length) {
+                        typewriterElements[1].textContent += secondLine.charAt(secondIndex);
+                        secondIndex++;
+                    } else {
+                        clearInterval(secondTypingInterval);
+                    }
+                }, 100); // 第二行每100毫秒显示一个字符，速度更快
             }, 1000);
         });
     </script>
