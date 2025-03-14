@@ -30,7 +30,7 @@
             font-family: 'MiSans', sans-serif; /* 使用 MiSans 字体 */
             color: #333;
             font-size: 2.5rem; /* 稍微调小字体 */
-            font-weight: bold;
+            font-weight: normal;
             padding: 20px;
             box-sizing: border-box;
         }
@@ -261,18 +261,51 @@
             align-items: center;
             text-align: center;
             padding: 30px;
-            max-width: 90%;
+            max-width: 80%;
+            width: fit-content;
             margin: 0 auto;
-            background-color: rgba(255, 255, 255, 0.2);
-            border-radius: 15px;
-            backdrop-filter: blur(5px);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background-color: rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            backdrop-filter: blur(8px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
         }
 
         /* 第二行文字样式 */
         .second-line {
-            font-size: 1.8rem; /* 第二行字体稍小 */
-            margin-top: 20px;
+            font-size: 1.5rem; /* 第二行字体更小一些 */
+            margin-top: 25px;
+            font-weight: normal;
+        }
+        
+        /* 第一行文字样式 */
+        .typewriter:first-child {
+            font-weight: bold;
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 768px) {
+            body {
+                font-size: 2rem;
+            }
+            .second-line {
+                font-size: 1.2rem;
+            }
+            .content-container {
+                padding: 20px;
+                max-width: 90%;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            body {
+                font-size: 1.8rem;
+            }
+            .second-line {
+                font-size: 1rem;
+            }
+            .content-container {
+                padding: 15px;
+            }
         }
 
         @keyframes cursor-blink {
